@@ -16,7 +16,7 @@ public class WeaponsShort : MonoBehaviour
 
             if (_ennemyTrigger.Life <= 0)
             {
-                Destroy(_ennemyTrigger.gameObject);
+                _ennemyTrigger.Die();
             }
         }
     }

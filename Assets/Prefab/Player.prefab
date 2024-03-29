@@ -551,7 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ObjectLauncher: {fileID: 6755722973520795929}
   PrefabObjectLaunch: {fileID: 631645537296709454, guid: cb721e03619bc4147aecc4172ab0516d, type: 3}
-  _speed: 10
+  _speed: 50
 --- !u!1 &7057949500754500210
 GameObject:
   m_ObjectHideFlags: 0

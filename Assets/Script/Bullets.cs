@@ -19,7 +19,7 @@ public class Bullets : MonoBehaviour
 
                 if (ennemy.Life <= 0)
                 {
-                    Destroy(ennemy.gameObject);
+                    ennemy.Die();
                 }
             }
 
