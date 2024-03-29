@@ -6,6 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
+    public float Life;
+
     [SerializeField] float _speed = 1;
     [SerializeField] float _x;
     [SerializeField] float _y;

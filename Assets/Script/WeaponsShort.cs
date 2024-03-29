@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WeaponsShort : MonoBehaviour
 {
-    public int Damage = 1;
+    public SpriteRenderer Sprite;
+    public float Damage = 1;
+    public float Cooldown = 1;
     [SerializeField] Ennemy _ennemyTrigger;
     [SerializeField] bool _isScriptOnPlayer = false;
 
