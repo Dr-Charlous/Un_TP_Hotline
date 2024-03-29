@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,13 +24,24 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    public UI Ui;
     public int Ennemies;
+    [SerializeField] PlayerController _playerController;
 
     public void CheckVictory()
     {
         if (Ennemies <= 0)
         {
-            Debug.Log("Victory");
+            Ui.WinScreen.SetActive(true);
         }
+        else if (_playerController.IsDead)
+        {
+            Ui.LoseScreen.SetActive(true);
+        }
+    }
+
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
+
     [SerializeField] CharactersWeaponnary _cW;
-    [SerializeField] WeaponsLong _wLong;
     [SerializeField] WeaponsShort _wShort;
+    [SerializeField] WeaponsLong _wLong;
 
     [SerializeField] TextMeshProUGUI _textUiBullet;
     [SerializeField] TextMeshProUGUI _textUi;

@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ennemy : MonoBehaviour
 {
     public float Life = 5;
-    [SerializeField] GameObject _mesh;
+
     [SerializeField] PlayerController _playerController;
+    [SerializeField] ThrowObjects _throw;
+    [SerializeField] WeaponsLong _wLong;
+    [SerializeField] GameObject _mesh;
     [SerializeField] float _speed = 1;
 
     private void Start()
@@ -16,7 +20,7 @@ public class Ennemy : MonoBehaviour
 
     private void Update()
     {
-        if (_playerController != null)
+        if (_playerController != null && !_wLong.isInRange)
         {
             //Move
             Vector2 direction = _playerController.transform.position - _mesh.transform.position;
@@ -39,6 +43,8 @@ public class Ennemy : MonoBehaviour
 
     public void Die()
     {
+        _throw.Throw();
+
         GameManager.Instance.Ennemies--;
         GameManager.Instance.CheckVictory();
         Destroy(this.gameObject);

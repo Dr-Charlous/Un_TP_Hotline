@@ -11,6 +11,7 @@ public class WeaponsLong : MonoBehaviour
     public float Cooldown = 1;
     public int Bullets = 100;
     public int BulletsPerShot = 1;
+    public bool isInRange = false;
 
     [SerializeField] GameObject _prefabBullet;
     [SerializeField] bool _isScriptOnPlayer = false;
@@ -28,6 +29,15 @@ public class WeaponsLong : MonoBehaviour
             Fire();
         }
     }
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!_isScriptOnPlayer && _cooldown >= Cooldown)
+        {
+            _cooldown = 0;
+            Fire();
+        }
+    }
 
     void Fire()
     {
@@ -39,4 +49,26 @@ public class WeaponsLong : MonoBehaviour
         obj.GetComponent<Rigidbody2D>().AddForce(direction * BulletSpeed * Time.deltaTime, ForceMode2D.Impulse);
         Bullets -= BulletsPerShot;
     }
+
+    #region Collision
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        PlayerController player = collision.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            isInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        PlayerController player = collision.GetComponent<PlayerController>();
+
+        if (player != null)
+        {
+            isInRange = false;
+        }
+    }
+    #endregion
 }

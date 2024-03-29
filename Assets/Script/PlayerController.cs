@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 using static UnityEngine.GraphicsBuffer;
@@ -7,6 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerController : MonoBehaviour
 {
     public float Life;
+    public bool IsDead = false;
 
     [SerializeField] float _speed = 1;
     [SerializeField] float _x;
@@ -21,13 +23,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //Move
-        _x = Input.GetAxis("Horizontal");
-        _y = Input.GetAxis("Vertical");
-        transform.position += new Vector3(_x, _y) * _speed * Time.deltaTime;
+        if (!IsDead)
+        {
+            //Move
+            _x = Input.GetAxis("Horizontal");
+            _y = Input.GetAxis("Vertical");
+            transform.position += new Vector3(_x, _y) * _speed * Time.deltaTime;
 
-        //Rotate
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _mesh.transform.position;
-        _mesh.transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+            //Rotate
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _mesh.transform.position;
+            _mesh.transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+        }
+    }
+
+    public void Die()
+    {
+        IsDead = true;
+
+        GameManager.Instance.CheckVictory();
     }
 }

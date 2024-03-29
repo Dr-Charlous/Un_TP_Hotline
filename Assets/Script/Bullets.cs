@@ -9,21 +9,42 @@ public class Bullets : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != Launcher)
+        if (Launcher.GetComponent<Ennemy>() != null && collision.GetComponent<Ennemy>() == null)
         {
-            Ennemy ennemy = collision.GetComponent<Ennemy>();
+            DamageBullet(collision.GetComponent<Ennemy>());
+        }
+        
+        if (Launcher.GetComponent<PlayerController>() != null && collision.GetComponent<PlayerController>() == null)
+        {
+            DamageBullet(collision.GetComponent<PlayerController>());
+        }
 
-            if (ennemy != null)
+        Destroy(this.gameObject);
+    }
+
+    void DamageBullet(Ennemy ennemy)
+    {
+        if (ennemy != null)
+        {
+            ennemy.Life -= Damage;
+
+            if (ennemy.Life <= 0)
             {
-                ennemy.Life -= Damage;
-
-                if (ennemy.Life <= 0)
-                {
-                    ennemy.Die();
-                }
+                ennemy.Die();
             }
+        }
+    }
 
-            Destroy(this.gameObject);
+    void DamageBullet(PlayerController player)
+    {
+        if (player != null)
+        {
+            player.Life -= Damage;
+
+            if (player.Life <= 0)
+            {
+                player.Die();
+            }
         }
     }
 }
